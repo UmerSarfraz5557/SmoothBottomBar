@@ -634,7 +634,11 @@ var toListenToClick = true
             MotionEvent.ACTION_UP -> {
                 for ((i, item) in items.withIndex()) {
                     if (item.rect.contains(event.x, event.y)) {
-                        onClickAction(i)
+                        if(toListenToClick){
+                            toListenToClick = false
+                            onClickAction(i)
+                            Handler().postDelayed({toListenToClick = true},300)
+                        }
                         break
                     }
                 }
@@ -648,8 +652,8 @@ var toListenToClick = true
     }
 
     private fun onClickAction(viewId : Int){
-        if(toListenToClick){
-            toListenToClick = false
+
+
             exploreByTouchHelper.invalidateVirtualView(viewId)
             if (viewId != itemActiveIndex) {
                 itemActiveIndex = viewId
@@ -664,8 +668,8 @@ var toListenToClick = true
                 AccessibilityEvent.TYPE_VIEW_CLICKED
             )
 
-            Handler().postDelayed({toListenToClick = true},250)
-        }
+
+
 
     }
 
