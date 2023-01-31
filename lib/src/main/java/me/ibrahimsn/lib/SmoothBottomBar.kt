@@ -313,7 +313,6 @@ var toListenToClick = true
     init {
         obtainStyledAttributes(attrs, defStyleAttr)
         exploreByTouchHelper = AccessibleExploreByTouchHelper(this, items, ::onClickAction)
-
         ViewCompat.setAccessibilityDelegate(this, exploreByTouchHelper)
     }
 
@@ -634,11 +633,11 @@ var toListenToClick = true
             MotionEvent.ACTION_UP -> {
                 for ((i, item) in items.withIndex()) {
                     if (item.rect.contains(event.x, event.y)) {
-                        if(toListenToClick){
-                            toListenToClick = false
+                       // if(toListenToClick){
+                           // toListenToClick = false
                             onClickAction(i)
-                            Handler().postDelayed({toListenToClick = true},300)
-                        }
+                          //  Handler().postDelayed({toListenToClick = true},300)
+                        //}
                         break
                     }
                 }
